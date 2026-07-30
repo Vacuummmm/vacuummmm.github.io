@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>2026合肥市直教师招聘进程</title>
+<style>
+  :root {
+    --bg: #f5f6fa;
+    --card: #fff;
+    --text: #2d3436;
+    --text2: #636e72;
+    --border: #e0e0e0;
+    --primary: #0984e3;
+    --success: #00b894;
+    --warning: #e17055;
+    --accent: #6c5ce7;
+    --pending: #b2bec3;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    padding: 24px 16px;
+    line-height: 1.6;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  .header { text-align: center; margin-bottom: 20px; }
+  .header h1 { font-size: 22px; font-weight: 700; }
+  .header .sub { font-size: 13px; color: var(--text2); margin-top: 4px; }
+  .header .chip { display: inline-block; background: var(--accent); color: #fff; font-size: 11px; font-weight: 600; padding: 2px 10px; border-radius: 12px; margin-left: 6px; }
+
+  /* 三张跳转卡牌 */
+  .cards { display: flex; gap: 10px; margin-bottom: 16px; }
+  .cards a {
+    flex: 1; background: var(--card); border-radius: 10px; padding: 12px 14px;
+    text-align: center; text-decoration: none; color: inherit;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    cursor: pointer; transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .cards a:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.12); }
+  .cards .n { font-size: 24px; font-weight: 700; }
+  .cards .l { font-size: 11px; color: var(--text2); margin-top: 2px; }
+  .cards a.done .n { color: var(--success); }
+  .cards a.act .n { color: var(--warning); }
+  .cards a.pend .n { color: var(--text2); }
+
+  /* 进度条 */
+  .pg { margin-bottom: 14px; }
+  .pg-top { display: flex; justify-content: space-between; font-size: 12px; color: var(--text2); margin-bottom: 4px; }
+  .pg-bar { height: 10px; background: #e8ecf1; border-radius: 5px; overflow: visible; position: relative; margin: 0 0; }
+  .pg-fill { height: 100%; background: linear-gradient(90deg, var(--success), var(--primary)); border-radius: 5px; width: 72.2%; position: relative; }
+  .pg-marker {
+    position: absolute; right: 0; top: 50%;
+    width: 18px; height: 18px; border-radius: 50%;
+    background: var(--warning); border: 2px solid #fff;
+    box-shadow: 0 0 0 2px var(--warning);
+    z-index: 1;
+    transform: translate(50%, -50%);
+  }
+  .pg-labels { display: flex; font-size: 9px; color: var(--text2); margin-top: 8px; }
+  .pg-labels span { text-align: center; flex: 1; }
+  .pg-labels .g { color: var(--success); }
+  .pg-labels .a { color: var(--warning); font-weight: 700; }
+
+  /* 倒计时 */
+  .cd {
+    background: linear-gradient(135deg, #fff8e1, #fff3e0);
+    border: 1px solid #ffe0b2; border-radius: 10px;
+    padding: 12px 16px; margin-bottom: 16px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .cd-l { font-size: 11px; color: #8d6e63; }
+  .cd-t { font-size: 20px; font-weight: 700; color: #e65100; }
+  .cd-r { font-size: 11px; color: #8d6e63; text-align: right; }
+
+  /* 时间线 */
+  .tl { position: relative; padding-left: 30px; }
+  .tl::before {
+    content: ''; position: absolute; left: 10px; top: 4px; bottom: 4px;
+    width: 3px; background: linear-gradient(180deg, var(--success) 0%, var(--success) 76%, var(--pending) 76%, var(--pending) 100%);
+    border-radius: 2px;
+  }
+  .ti {
+    position: relative; margin-bottom: 8px; padding: 10px 14px;
+    background: var(--card); border-radius: 8px; border-left: 4px solid var(--success);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+    scroll-margin-top: 16px;
+  }
+  .ti.pending { border-left-color: var(--pending); opacity: 0.55; }
+  .ti.active { border-left-color: var(--warning); background: linear-gradient(135deg, #fff5f5, #fff8e1); }
+  .td {
+    position: absolute; left: -22px; top: 12px;
+    width: 14px; height: 14px; border-radius: 50%;
+    background: var(--success); border: 2px solid var(--bg);
+    box-shadow: 0 0 0 3px var(--success);
+  }
+  .td.pending { background: var(--pending); box-shadow: 0 0 0 3px var(--pending); }
+  .td.active {
+    background: var(--warning); box-shadow: 0 0 0 3px var(--warning);
+    animation: pulse 1.6s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 3px var(--warning); }
+    50% { box-shadow: 0 0 0 7px rgba(225,112,85,0.25); }
+  }
+  .tt { font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+  .tv { font-size: 11px; color: var(--text2); margin-top: 2px; }
+  .tx { font-size: 11px; color: var(--text2); margin-top: 2px; }
+  .b { font-size: 10px; font-weight: 600; padding: 1px 6px; border-radius: 3px; white-space: nowrap; }
+  .bd { background: #e8f5e9; color: #2e7d32; }
+  .ba { background: #fce4ec; color: #c62828; }
+  .bp { background: #f5f5f5; color: #9e9e9e; }
+  .bf { background: #ede7f6; color: #4527a0; font-weight: 700; }
+  .ft { text-align: center; font-size: 11px; color: #999; margin-top: 16px; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>📋 2026合肥市直教师招聘进程</h1>
+  <div class="sub">合肥六中新桥校区 <span class="chip">🔴 重点</span> · 758人 · 7/30更新</div>
+</div>
+
+<!-- 三张跳转卡牌 -->
+<div class="cards">
+  <a class="done" href="#s6" onclick="document.getElementById('s6').scrollIntoView({behavior:'smooth'});return false;">
+    <div class="n">6</div>
+    <div class="l">✅ 已完成</div>
+  </a>
+  <a class="act" href="#s7" onclick="document.getElementById('s7').scrollIntoView({behavior:'smooth'});return false;">
+    <div class="n">1</div>
+    <div class="l">🟡 进行中</div>
+  </a>
+  <a class="pend" href="#s8" onclick="document.getElementById('s8').scrollIntoView({behavior:'smooth'});return false;">
+    <div class="n">2</div>
+    <div class="l">⏳ 待进行</div>
+  </a>
+</div>
+
+<!-- 进度条 -->
+<div class="pg">
+  <div class="pg-top"><span>整体进度</span><span style="color:#e53935;font-weight:700;">7/9 当前：体检</span></div>
+  <div class="pg-bar">
+    <div class="pg-fill"><div class="pg-marker"></div></div>
+  </div>
+  <div class="pg-labels">
+    <span class="g">公告</span><span class="g">报名</span><span class="g">笔试</span><span class="g">复审</span><span class="g">面试</span><span class="g">成绩</span><span class="a">体检</span><span>考察</span><span>公示</span>
+  </div>
+</div>
+
+<!-- 体检倒计时 -->
+<div class="cd">
+  <div>
+    <div class="cd-l">距体检 ⏰</div>
+    <div class="cd-t">8月1日(周六) 06:30</div>
+  </div>
+  <div class="cd-r">合肥六中百花井校区<br>禁食禁水 · 空腹</div>
+</div>
+
+<!-- 时间线 -->
+<div class="tl">
+
+  <div class="ti" id="s1">
+    <div class="td"></div>
+    <div class="tt">① 招聘公告发布 <span class="b bd">✓</span></div>
+    <div class="tv">5月25日</div>
+    <div class="tx">758名，六中新桥校区在列</div>
+  </div>
+
+  <div class="ti" id="s2">
+    <div class="td"></div>
+    <div class="tt">② 网上报名 <span class="b bd">✓</span></div>
+    <div class="tv">5月28日(周四) — 6月3日(周三)</div>
+  </div>
+
+  <div class="ti" id="s3">
+    <div class="td"></div>
+    <div class="tt">③ 笔试 <span class="b bd">✓</span></div>
+    <div class="tv">6月27日(周六)</div>
+    <div class="tx">上午 学科专业知识 · 下午 教育综合知识</div>
+  </div>
+
+  <div class="ti" id="s4">
+    <div class="td"></div>
+    <div class="tt">④ 成绩公布 &amp; 资格复审 <span class="b bd">✓</span></div>
+    <div class="tv">出分 7/6(周一) · 复审 7/11(周六)-12(周日) · 递补 7/15(周三)</div>
+  </div>
+
+  <div class="ti" id="s5">
+    <div class="td"></div>
+    <div class="tt">⑤ 专业测试（面试） <span class="b bd">✓</span></div>
+    <div class="tv">7月23日(周四) — 7月24日(周五)</div>
+    <div class="tx">教案设计 + 无生上课 + 答辩</div>
+  </div>
+
+  <div class="ti" id="s6">
+    <div class="td"></div>
+    <div class="tt">⑥ 最终成绩公布 <span class="b bd">✓</span></div>
+    <div class="tv">7月27日(周一)</div>
+    <div class="tx">笔试+面试合成总成绩公布，体检考察另行通知</div>
+  </div>
+
+  <div class="ti active" id="s7">
+    <div class="td active"></div>
+    <div class="tt">
+      ⑦ 体检 <span class="b ba">🟡 进行中</span>
+      <span class="b bf">8/1 六中新桥</span>
+    </div>
+    <div class="tv">公告 7/30(周四) · 体检 8/1(周六) — 8/2(周日)</div>
+    <div class="tx">百花井校区 6:30 集合 · 身份证+二寸照 · 手机缴费 · 空腹禁食禁水</div>
+  </div>
+
+  <div class="ti pending" id="s8">
+    <div class="td pending"></div>
+    <div class="tt">⑧ 考察（政审） <span class="b bp">待进行</span></div>
+    <div class="tv">预计 8月中旬</div>
+    <div class="tx">政治标准 · 道德品质 · 资格复核 · 🔍每30分钟自动监控</div>
+  </div>
+
+  <div class="ti pending" id="s9">
+    <div class="td pending"></div>
+    <div class="tt">⑨ 拟聘人员公示 <span class="b bp">待进行</span></div>
+    <div class="tv">预计 8月下旬 — 9月</div>
+    <div class="tx">公示5个工作日 · 公示结束后签约入编</div>
+  </div>
+
+</div>
+
+<div class="ft">🔍 自动监控中 · 每30分钟巡检 · 任务 #4442217<br>2025参考：考察递补 7/18-8/6，拟聘公示 8/19-8/25</div>
+
+</body>
+</html>
