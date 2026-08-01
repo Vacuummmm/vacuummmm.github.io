@@ -57,7 +57,7 @@
   .pg { margin-bottom: 14px; }
   .pg-top { display: flex; justify-content: space-between; font-size: 12px; color: var(--text2); margin-bottom: 4px; }
   .pg-bar { height: 10px; background: #e8ecf1; border-radius: 5px; overflow: visible; position: relative; margin: 0 0; }
-  .pg-fill { height: 100%; background: linear-gradient(90deg, var(--success), var(--primary)); border-radius: 5px; width: 72.2%; position: relative; }
+  .pg-fill { height: 100%; background: linear-gradient(90deg, var(--success), var(--primary)); border-radius: 5px; width: 83.3%; position: relative; }
   .pg-marker {
     position: absolute; right: 0; top: 50%;
     width: 18px; height: 18px; border-radius: 50%;
@@ -86,7 +86,7 @@
   .tl { position: relative; padding-left: 30px; }
   .tl::before {
     content: ''; position: absolute; left: 10px; top: 4px; bottom: 4px;
-    width: 3px; background: linear-gradient(180deg, var(--success) 0%, var(--success) 76%, var(--pending) 76%, var(--pending) 100%);
+    width: 3px; background: linear-gradient(180deg, var(--success) 0%, var(--success) 87%, var(--pending) 87%, var(--pending) 100%);
     border-radius: 2px;
   }
   .ti {
@@ -133,45 +133,45 @@
   <h1>📋 2026合肥市直教师招聘进程</h1>
   <div class="sub">合肥六中新桥校区 <span class="chip">🔴 重点</span> · 758人</div>
   <div class="update-info">
-    <span>🕐 内容更新：7/30 体检公告</span>
-    <span>🔍 监控巡检：7/31 21:22 ✅</span>
+    <span>🕐 内容更新：8/2 体检完成</span>
+    <span>🔍 监控巡检：8/2 00:10 ✅</span>
   </div>
 </div>
 
 <!-- 三张跳转卡牌 -->
 <div class="cards">
-  <a class="done" href="#s6" onclick="document.getElementById('s6').scrollIntoView({behavior:'smooth'});return false;">
-    <div class="n">6</div>
+  <a class="done" href="#s7" onclick="document.getElementById('s7').scrollIntoView({behavior:'smooth'});return false;">
+    <div class="n">7</div>
     <div class="l">✅ 已完成</div>
   </a>
-  <a class="act" href="#s7" onclick="document.getElementById('s7').scrollIntoView({behavior:'smooth'});return false;">
+  <a class="act" href="#s8" onclick="document.getElementById('s8').scrollIntoView({behavior:'smooth'});return false;">
     <div class="n">1</div>
     <div class="l">🟡 进行中</div>
   </a>
-  <a class="pend" href="#s8" onclick="document.getElementById('s8').scrollIntoView({behavior:'smooth'});return false;">
-    <div class="n">2</div>
+  <a class="pend" href="#s9" onclick="document.getElementById('s9').scrollIntoView({behavior:'smooth'});return false;">
+    <div class="n">1</div>
     <div class="l">⏳ 待进行</div>
   </a>
 </div>
 
 <!-- 进度条 -->
 <div class="pg">
-  <div class="pg-top"><span>整体进度</span><span style="color:#e53935;font-weight:700;">7/9 当前：体检</span></div>
+  <div class="pg-top"><span>整体进度</span><span style="color:#e53935;font-weight:700;">8/9 当前：考察（政审）</span></div>
   <div class="pg-bar">
     <div class="pg-fill"><div class="pg-marker"></div></div>
   </div>
   <div class="pg-labels">
-    <span class="g">公告</span><span class="g">报名</span><span class="g">笔试</span><span class="g">复审</span><span class="g">面试</span><span class="g">成绩</span><span class="a">体检</span><span>考察</span><span>公示</span>
+    <span class="g">公告</span><span class="g">报名</span><span class="g">笔试</span><span class="g">复审</span><span class="g">面试</span><span class="g">成绩</span><span class="g">体检</span><span class="a">考察</span><span>公示</span>
   </div>
 </div>
 
-<!-- 体检倒计时 -->
+<!-- 等待考察公告 -->
 <div class="cd">
   <div>
-    <div class="cd-l">⏰</div>
-    <div class="cd-t">8月1日(周六) 06:30</div>
+    <div class="cd-l">📋 等待考察（政审）公告</div>
+    <div class="cd-t">预计 8月中旬</div>
   </div>
-  <div class="cd-r">合肥六中百花井校区<br>禁食禁水 · 空腹</div>
+  <div class="cd-r">体检已完成 ✅<br>🔍 每30分钟自动监控中</div>
 </div>
 
 <!-- 时间线 -->
@@ -224,21 +224,19 @@
     <a class="lk" href="https://www.sohu.com/a/1055400623_121124316" target="_blank">📎 成绩公布公告</a>
   </div>
 
-  <div class="ti active" id="s7">
-    <div class="td active"></div>
-    <div class="tt">
-      ⑦ 体检 <span class="b ba">🟡 进行中</span>
-      <span class="b bf">8/1 六中新桥</span>
-    </div>
-    <div class="tv">公告 7/30(周四) · 体检 8/1(周六) — 8/2(周日)</div>
-    <div class="tx">百花井校区 6:30 集合 · 身份证+二寸照 · 手机缴费 · 空腹禁食禁水</div>
+  <div class="ti" id="s7">
+    <div class="td"></div>
+    <div class="tt">⑦ 体检 <span class="b bd">✓</span></div>
+    <div class="tv">公告 7/30(周四) · 体检 8/1(周五) — 8/2(周六)</div>
+    <div class="tx">合肥六中（菱湖校区、百花井校区、新桥校区）8/1体检 · 空腹禁食禁水</div>
     <a class="lk" href="https://jyj.hefei.gov.cn/jydt/tzgg/18964491.html" target="_blank">📎 体检公告原文</a>
+    <a class="lk" href="https://jiaoshi.huatu.com/2026/0731/2869678.html" target="_blank">📎 体检公告（华图）</a>
   </div>
 
-  <div class="ti pending" id="s8">
-    <div class="td pending"></div>
-    <div class="tt">⑧ 考察（政审） <span class="b bp">待进行</span></div>
-    <div class="tv">预计 8月中旬</div>
+  <div class="ti active" id="s8">
+    <div class="td active"></div>
+    <div class="tt">⑧ 考察（政审） <span class="b ba">🟡 进行中</span></div>
+    <div class="tv">体检已完成 · 等待考察公告发布</div>
     <div class="tx">政治标准 · 道德品质 · 资格复核 · 🔍每30分钟自动监控</div>
   </div>
 
@@ -251,7 +249,7 @@
 
 </div>
 
-<div class="ft">🔍 自动监控中 · 每30分钟巡检 · 任务 #4442217 · 上次巡检 7/31 21:22 14:59<br>2025参考：考察递补 7/18-8/6，拟聘公示 8/19-8/25</div>
+<div class="ft">🔍 自动监控中 · 每30分钟巡检 · 任务 #4442217 · 上次巡检 8/2 00:10<br>2025参考：考察递补 7/18-8/6，拟聘公示 8/19-8/25</div>
 
 </body>
 </html>
